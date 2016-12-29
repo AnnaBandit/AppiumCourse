@@ -13,7 +13,6 @@ public class MainPage extends AndroidBasePage{
     private String agreeButtonID = "android:id/button1";
     private String nonoButtonID = "android:id/button2";
     private String customPopupID = "android:id/parentPanel";
-    private String registrationButtonID = "io.selendroid.testapp:id/startUserRegistration";
 
     @FindBy(id="io.selendroid.testapp:id/buttonTest")
     WebElement enButton;
@@ -59,8 +58,7 @@ public class MainPage extends AndroidBasePage{
         return customPopup.findElement(By.id(messageID)).getText();
     }
 
-    public RegistrationPage clickRegistrationButton(){
+    public void clickRegistrationButton(){
         registrationButton.click();
-        return new RegistrationPage();
     }
 }
