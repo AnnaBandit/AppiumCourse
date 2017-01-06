@@ -4,11 +4,15 @@ import framework.AndroidBasePage;
 import io.appium.java_client.MobileElement;
 import models.User;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
+
+import java.util.List;
 
 import static framework.Utils.isElementPresent;
 
 public class RegistrationPage extends AndroidBasePage{
 
+    private String welcomeMessageID = "";
     private String userNameInputID = "io.selendroid.testapp:id/inputUsername";
     private String emailInputID = "io.selendroid.testapp:id/inputEmail";
     private String passwordInputID = "io.selendroid.testapp:id/inputPassword";
@@ -22,8 +26,12 @@ public class RegistrationPage extends AndroidBasePage{
     private String savedPasswordID = "io.selendroid.testapp:id/label_password_data";
     private String savedEmailID = "io.selendroid.testapp:id/label_email_data";
     private String savedProgrammingLanguageID = "io.selendroid.testapp:id/label_preferedProgrammingLanguage_data";
-    private String savedAcceptAdds = "io.selendroid.testapp:id/label_acceptAdds_data";
+    private String savedAcceptAddsID = "io.selendroid.testapp:id/label_acceptAdds_data";
     private String registerUserButtonID = "io.selendroid.testapp:id/buttonRegisterUser";
+
+    public boolean isRegistrationFormOpened(){
+        return androiddriver.findElementsById(userNameInputID).size() == 1;
+    }
 
     private void setUsername(String username){
         MobileElement userNameInput = (MobileElement) androiddriver.findElementsById(userNameInputID).get(0);
@@ -52,7 +60,8 @@ public class RegistrationPage extends AndroidBasePage{
     private void selectProgrammingLanguageFromDropdown(String language){
         MobileElement programmingLanguageDropdown = (MobileElement) androiddriver.findElementsById(programmingLanguageDropdownID).get(0);
         programmingLanguageDropdown.click();
-        programmingLanguageDropdown.findElement(By.name(language)).click();
+        androiddriver.findElement(By.name(language)).click();
+
     }
 
     private void clickAcceptAddsCheckbox(){
@@ -60,7 +69,7 @@ public class RegistrationPage extends AndroidBasePage{
         acceptAddsCheckbox.click();
     }
 
-    private void clickRegisterUserButton(){
+    public void clickRegisterUserButton(){
         MobileElement registerUserButton = (MobileElement) androiddriver.findElementsById(registerUserButtonID).get(0);
         registerUserButton.click();
     }
@@ -111,8 +120,9 @@ public class RegistrationPage extends AndroidBasePage{
         return savedProgrammingLanguage.getText().equals(programmingLanguage);
     }
 
-    public boolean nameIsSavedCorrectly(boolean acceptAdds){
-        MobileElement savedAcceptAdds = (MobileElement) androiddriver.findElementsById(acceptAddsCheckboxID).get(0);
-        return savedAcceptAdds.getText().equals("true");
+    public boolean acceptAddsIsSavedCorrectly(boolean acceptAdds){
+        MobileElement savedAcceptAdds = (MobileElement) androiddriver.findElementsById(savedAcceptAddsID).get(0);
+        return  (Boolean.toString(acceptAdds)).equals(savedAcceptAdds.getText());
     }
+
 }
