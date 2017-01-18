@@ -18,7 +18,7 @@ import static java.lang.Thread.sleep;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
-public class EnButtonTest extends BaseTest{
+public class NativeContextTest extends BaseTest{
 
     private MainPage mainPage;
     private RegistrationPage regPage;
@@ -105,8 +105,8 @@ public class EnButtonTest extends BaseTest{
         actionsPage.tapOnScreen();
         assertTrue(actionsPage.isShowedGestureTypeRight("SINGLE TAP CONFIRMED"));
 
- /*       actionsPage.doubleTapOnScreen();
-        assertTrue(actionsPage.isShowedGestureTypeRight("ON DOUBLE TAP EVENT"));*/
+        actionsPage.doubleTapOnScreen();
+        assertTrue(actionsPage.isShowedGestureTypeRight("ON DOUBLE TAP EVENT"));
 
         actionsPage.swipeOnScreen();
         assertTrue(actionsPage.isShowedGestureTypeRight("FLICK"));
