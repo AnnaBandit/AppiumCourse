@@ -2,6 +2,7 @@ package framework;
 
 import io.appium.java_client.AppiumDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,7 +28,14 @@ public class Utils {
     }*/
 
     public static boolean isElementPresent(String id){
-        return androiddriver.findElementsById(id).size() > 0;
+
+        try{
+            androiddriver.findElementById(id);
+            return true;
+        } catch (NoSuchElementException e){
+            return false;
+        }
+
     }
 
     public static boolean isElementPresent(By by) {

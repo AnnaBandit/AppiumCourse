@@ -8,11 +8,13 @@ import org.testng.annotations.Test;
 import pages.MainPage;
 import pages.RegistrationPage;
 import pages.TouchActionsPage;
+import pages.WebPage;
 
 import java.sql.Driver;
 
 import static framework.AndroidBasePage.androiddriver;
 import static framework.AndroidBasePage.initPage;
+import static java.lang.Thread.sleep;
 import static org.testng.Assert.assertFalse;
 import static org.testng.Assert.assertTrue;
 
@@ -21,6 +23,7 @@ public class EnButtonTest extends BaseTest{
     private MainPage mainPage;
     private RegistrationPage regPage;
     private TouchActionsPage actionsPage;
+    private WebPage webPage;
 
     private User user = new User("TestUsername", "test@username.com", "1234qwer", "TestName", "Java", true);
 
@@ -29,6 +32,7 @@ public class EnButtonTest extends BaseTest{
         mainPage = initPage(MainPage.class);
         regPage = initPage(RegistrationPage.class);
         actionsPage = initPage(TouchActionsPage.class);
+        webPage = initPage(WebPage.class);
     }
 
     @AfterMethod
@@ -98,10 +102,10 @@ public class EnButtonTest extends BaseTest{
         mainPage.clickTouchActionsButton();
         assertTrue(actionsPage.isTouchActionsPageOpened());
 
-/*        actionsPage.tapOnScreen();
+        actionsPage.tapOnScreen();
         assertTrue(actionsPage.isShowedGestureTypeRight("SINGLE TAP CONFIRMED"));
 
-        actionsPage.doubleTapOnScreen();
+ /*       actionsPage.doubleTapOnScreen();
         assertTrue(actionsPage.isShowedGestureTypeRight("ON DOUBLE TAP EVENT"));*/
 
         actionsPage.swipeOnScreen();
@@ -112,5 +116,14 @@ public class EnButtonTest extends BaseTest{
 
         actionsPage.scrollOnScreen();
         assertTrue(actionsPage.isShowedGestureTypeRight("SCROLL"));
+    }
+
+    @Test
+    public void testWebPage(){
+        mainPage.clickWebViewButton();
+        assertTrue(webPage.isWebViewOpened());
+
+        webPage.selectFromTestDataDropdown("‘Say Hello’-Demo");
+        assertTrue(webPage.valueIsSelected("‘Say Hello’-Demo"));
     }
 }

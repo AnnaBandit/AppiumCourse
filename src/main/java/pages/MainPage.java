@@ -1,10 +1,13 @@
 package pages;
 
 import framework.AndroidBasePage;
+import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.MobileElement;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static framework.Utils.isElementPresent;
 import static java.lang.Thread.sleep;
@@ -53,7 +56,7 @@ public class MainPage extends AndroidBasePage{
     }
 
     public boolean customPopupIsDisplayed(){
-        return androiddriver.findElementsById(customPopupID).size() == 1;
+        return isElementPresent(customPopupID);
     }
 
     private WebElement getIAgreeButton(){

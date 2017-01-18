@@ -23,12 +23,14 @@ public class TouchActionsPage extends AndroidBasePage{
 
     public void tapOnScreen(){
         MobileElement element = (MobileElement) androiddriver.findElementsById(gestureTypeTextViewID).get(0);
-        androiddriver.tap(1, element, 0);
+        /*androiddriver.tap(1, element, 0);*/
+        new TouchAction(androiddriver).press(element).release();
     }
 
     public void doubleTapOnScreen(){
         TouchAction action = new TouchAction(androiddriver);
         action.press(1,1).perform().release().press(0, 0).perform();
+
     }
 
     public void swipeOnScreen(){
@@ -47,6 +49,5 @@ public class TouchActionsPage extends AndroidBasePage{
     public boolean isShowedGestureTypeRight(String text){
         return gestureTypeTextView.getText().equals(text);
     }
-
 
 }
