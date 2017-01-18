@@ -3,7 +3,10 @@ package pages;
 import framework.AndroidBasePage;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.touch.TouchActions;
 import org.openqa.selenium.support.FindBy;
 
 import static framework.Utils.isElementPresent;
@@ -22,26 +25,29 @@ public class TouchActionsPage extends AndroidBasePage{
     }
 
     public void tapOnScreen(){
+        TouchAction action = new TouchAction(androiddriver);
         MobileElement element = (MobileElement) androiddriver.findElementsById(gestureTypeTextViewID).get(0);
-        androiddriver.tap(1, element, 0);
+        action.tap(element).perform();
     }
 
     public void doubleTapOnScreen(){
         TouchAction action = new TouchAction(androiddriver);
-        action.press(1,1).perform().release().press(0, 0).perform();
+        MobileElement element = (MobileElement) androiddriver.findElementsById(gestureTypeTextViewID).get(0);
+        action.tap(element).tap(element).perform();
     }
 
     public void swipeOnScreen(){
-        androiddriver.swipe(100, 100, 100, 130, 1000);
+        androiddriver.swipe(100, 100, 100, 150, 100);
     }
 
     public void longPressOnScreen(){
         TouchAction action = new TouchAction(androiddriver);
-        action.longPress(gestureTypeTextView).release().perform();
+        MobileElement gestureType = (MobileElement) androiddriver.findElementsById(gestureTypeTextViewID).get(0);
+        action.longPress(gestureType, 2000).perform();
     }
 
     public void scrollOnScreen(){
-        androiddriver.swipe(10, 10, 10, 30, 3000);
+        androiddriver.swipe(100, 100, 100, 200, 1000);
     }
 
     public boolean isShowedGestureTypeRight(String text){
